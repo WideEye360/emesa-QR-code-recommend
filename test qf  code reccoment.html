@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      padding: 24px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px 20px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s, opacity 0.15s;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .view-button {
+      color: white;
+      background: #111827;
+    }
+
+    .share-button {
+      color: #111827;
+      background: white;
+      border: 1px solid #d1d5db;
+    }
+.google-button {
+  color: white;
+  background: #4285F4;
+}
+
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="buttons">
+
+      <button class="view-button" onclick="viewRestaurant()">
+        View Restaurant
+      </button>
+
+      <button class="share-button" onclick="shareRestaurant()">
+        Share with a friend
+      </button>
+<button class="google-button" onclick="rateUs()">
+  ⭐ Rate us on Google
+</button>
+
+    </div>
+  </div>
+
+  <script>
+    function viewRestaurant() {
+      // Replace this with your restaurant URL
+      window.open("https://maps.app.goo.gl/B3fL4zZrSiUKcPQG9");
+    }
+const restaurantUrl = "https://maps.app.goo.gl/B3fL4zZrSiUKcPQG9";
+
+    async function shareRestaurant() {
+      const shareData = {
+        title: "Check out this restaurant!",
+        text: "I found this restaurant and thought you might like it.",
+        url: restaurantUrl
+      };
+
+      // Open the phone's native sharing menu
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+        } catch (error) {
+          // User cancelled the share menu — nothing to do.
+          console.log("Sharing cancelled");
+        }
+      } else {
+       
+    } // Fallback for browsers that don't support Web Share API
+        try {
+          await navigator.clipboard.writeText(restaurantUrl);
+          alert("Restaurant link copied to clipboard!");
+        } catch (error) {
+          alert("Copy this link to share: " + restaurantUrl);
+        }
+      }
+function rateUs() {
+  window.open(
+    "https://search.google.com/local/writereview?placeid=ChIJ__JRg86FqkARNY3_-i3QHp4",
+    "_blank"
+  );
+}
+  </script>
+
+</body>
+</html>
