@@ -94,31 +94,33 @@
     }
 const restaurantUrl = "https://maps.app.goo.gl/B3fL4zZrSiUKcPQG9";
 
-    async function shareRestaurant() {
-      const shareData = {
-        title: "Check out this restaurant!",
-        text: "I found this restaurant and thought you might like it.",
-        url: restaurantUrl
-      };
+   async function shareRestaurant() {
+  const shareData = {
+    title: "Check out this restaurant!",
+    text: "I found this restaurant and thought you might like it.",
+    url: restaurantUrl
+  };
 
-      // Open the phone's native sharing menu
-      if (navigator.share) {
-        try {
-          await navigator.share(shareData);
-        } catch (error) {
-          // User cancelled the share menu — nothing to do.
-          console.log("Sharing cancelled");
-        }
-      } else {
-       
-    } // Fallback for browsers that don't support Web Share API
-        try {
-          await navigator.clipboard.writeText(restaurantUrl);
-          alert("Restaurant link copied to clipboard!");
-        } catch (error) {
-          alert("Copy this link to share: " + restaurantUrl);
-        }
-      }
+  // Mobile/tablet: use native sharing
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+    } catch (error) {
+      // User cancelled sharing — do nothing.
+      console.log("Sharing cancelled");
+    }
+  } 
+  
+  // Desktop: copy link to clipboard
+  else {
+    try {
+      await navigator.clipboard.writeText(restaurantUrl);
+      alert("Restaurant link copied to clipboard!");
+    } catch (error) {
+      alert("Copy this link to share: " + restaurantUrl);
+    }
+  }
+}
 function rateUs() {
   window.open(
     "https://search.google.com/local/writereview?placeid=ChIJ__JRg86FqkARNY3_-i3QHp4",
